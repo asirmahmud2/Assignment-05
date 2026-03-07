@@ -8,21 +8,56 @@
     <title>GitHub Issues Tracker</title>
 
     <!-- font awesome  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- font integration  -->
-    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+
+        *{
+            font-family: "Geist", sans-serif;
+        }
+    </style>
 
     <!-- tailwind+daisyui  -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <!-- stylesheet  -->
 </head>
 
 <body>
+    <!-- Log in -->
+    <section class="flex justify-center items-center h-screen">
+        <div class="max-w-[520px]">
+            <fieldset class="fieldset bg-white border-base-300 rounded-box w-120 border shadow-2xl p-10">
+                <div class="flex flex-col justify-center items-center space-y-3 mb-10">
+                    <img src="assets/github-logo.png" alt="">
+                    <h2 class="font-bold text-2xl">GitHub Issues Tracker</h2>
+                    <p class="text-gray-600 text-sm">Sign in to manage your issues</p>
+                </div>
 
+                <label class="label text-xl font-bold">Username</label>
+                <input id="login-username" type="text" class="input w-full" placeholder="Email" value="admin"/>
+
+                <label class="label text-xl font-bold">Password</label>
+                <input id="login-password" type="password" class="input w-full" placeholder="Password" value="admin123" />
+
+                <button id="login-btn" class="btn btn-primary mt-4">Login</button>
+
+                <hr class="text-gray-400 mt-5 mb-5">
+                <p class="text-center text-base">Demo Credentials:</p>
+                <div class="bg-gray-200 text-center p-5">
+                    <h2 class="text-base"><span class="text-xl font-bold">Username : </span> admin</h2>
+                    <h2 class="text-base"><span class="text-xl font-bold">Password : </span> admin123</h2>
+                </div>
+            </fieldset>
+        </div>
+    </section>
+
+    <script src="scripts/login.js"></script>
 </body>
 
 </html>
