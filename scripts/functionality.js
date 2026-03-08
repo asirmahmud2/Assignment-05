@@ -1,5 +1,5 @@
 const createLevel = (arr) => {
-    const Levels = arr.map(el =>`<span class="btn rounded-2xl">${el}</span>`);
+    const Levels = arr.map(el => `<span class="btn rounded-2xl">${el}</span>`);
     return (Levels.join(' '));
 }
 
@@ -36,10 +36,10 @@ const displayAllCards = (allCard) => {
 
         const cardDiv = document.createElement('div');
         cardDiv.innerHTML = `
-        <div class="card bg-white p-7 ${color} space-y-2">
+        <div onclick="loadCardDetails(${card.id})" class="card bg-white p-7 ${color} space-y-2">
                         <div class="flex justify-between">
                             <img src="${img}" alt="">
-                            <p class="btn rounded-2xl">${card.priority}</p>
+                            <p class="btn rounded-2xl bg-red-400">${card.priority}</p>
                         </div>
 
                         <div class="space-y-2">
@@ -54,7 +54,7 @@ const displayAllCards = (allCard) => {
                         <hr class="-mx-5 my-5 border-gray-200">
                         <div>
                             <p>${card.author}</p>
-                            <p>${card.createdAt}</p>
+                            <p>${new Date(card.createdAt).toLocaleDateString()}</p>
                         </div>
                     </div>
         `;
@@ -84,12 +84,12 @@ const addClosedCard = (card) => {
 loadAllCards();
 
 
-const updateCount=(id)=>{
-    const container=document.getElementById(id);
+const updateCount = (id) => {
+    const container = document.getElementById(id);
     const totalCards = container.children.length;
 
-    const update =document.getElementById('issue-no');
-    update.innerText=totalCards;
+    const update = document.getElementById('issue-no');
+    update.innerText = totalCards;
 }
 
 const switchTab = (id, id1) => {
@@ -121,14 +121,14 @@ const switchTab = (id, id1) => {
 }
 
 
-document.getElementById('search-btn').addEventListener('click',()=>{
+document.getElementById('search-btn').addEventListener('click', () => {
     const searchInput = document.getElementById('search-input');
-    const input= searchInput.value;
-    const url=`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
+    const input = searchInput.value;
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
 
     fetch(url)
-    .then(res=>res.json())
-    .then(json=>showSearchCard(json.data));
+        .then(res => res.json())
+        .then(json => showSearchCard(json.data));
 });
 
 const showSearchCard = (allCard) => {
@@ -138,13 +138,13 @@ const showSearchCard = (allCard) => {
     const color2 = "border-t-4 border-purple-500";
     const img1 = "assets/open-Status.png";
     const img2 = "assets/closed-Status.png";
-    
-    
+
+
     for (let card of allCard) {
         const status = card.status;
         let color = "";
         let img = "";
-        
+
         if (status == "open") {
             color = color1;
             img = img1;
@@ -153,10 +153,10 @@ const showSearchCard = (allCard) => {
             color = color2;
             img = img2;
         }
-        
+
         const cardDiv = document.createElement('div');
         cardDiv.innerHTML = `
-        <div class="card bg-white p-7 ${color} space-y-2">
+        <div onclick="loadCardDetails(${card.id})" class="card bg-white p-7 ${color} space-y-2">
         <div class="flex justify-between">
         <img src="${img}" alt="">
         <p class="btn rounded-2xl">${card.priority}</p>
@@ -174,12 +174,56 @@ const showSearchCard = (allCard) => {
         <hr class="-mx-5 my-5 border-gray-200">
         <div>
         <p>${card.author}</p>
-        <p>${card.createdAt}</p>
+        <p>${new Date(card.createdAt).toLocaleDateString()}</p>
         </div>
         </div>
         `;
-        
+
         allCardContainer.append(cardDiv);
     }
-    switchTab('search-container','all-btn');
+    switchTab('search-container', 'all-btn');
+}
+
+
+const loadCardDetails = (id) => {
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(json => displayCardDetails(json.data))
+}
+
+const displayCardDetails = (card) => {
+    const modalDetails = document.getElementById('details-container');
+    modalDetails.innerHTML = `
+    <div class="p-8 space-y-3">
+                        <h2 class="text-2xl font-bold">${card.title}</h2>
+                        <p class="text-gray-600"> <span class="btn rounded-2xl bg-green-300">${card.status}</span> . Opened by ${card.author} .
+                            ${new Date(card.createdAt).toLocaleDateString()}</p>
+
+                        <div>
+                            ${createLevel(card.labels)}
+                        </div>
+
+                        <p class="text-gray-600">${card.description}</p>
+
+                        <div class="bg-gray-200 rounded-xl p-6 flex justify-between items-center mt-4">
+                            <div>
+                                <p class="text-gray-500 text-sm">Assignee:</p>
+                                <p class="font-semibold text-lg">${card.author} </p>
+                            </div>
+
+                            <div class="text-right">
+                                <p class="text-gray-500 text-sm">Priority:</p>
+                                <span class="btn text-base font-bold px-4 py-1 rounded-full bg-red-400">
+                                    ${card.priority}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+    `;
+
+
+    document.getElementById('my_modal_5').showModal();
+
 }

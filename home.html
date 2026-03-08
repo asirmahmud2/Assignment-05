@@ -38,7 +38,8 @@
                 </div>
 
                 <div class="flex gap-2">
-                    <input id="search-input" type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                    <input id="search-input" type="text" placeholder="Search"
+                        class="input input-bordered w-24 md:w-auto" />
 
                     <button id="search-btn" class="btn btn-primary font-bold text-white">Search</button>
                 </div>
@@ -50,9 +51,12 @@
         <!-- Buttons -->
         <section
             class="bg-white border border-gray-100 rounded-xl shadow-md w-10/12 mx-auto p-10 mt-15 mb-5 flex gap-3">
-            <button onclick="switchTab('all-card-container','all-btn')" id="all-btn" class="btn btn-primary font-bold w-[90px]">All</button>
-            <button onclick="switchTab('open-container','open-btn')" id="open-btn" class="btn font-bold w-[90px]">Open</button>
-            <button onclick="switchTab('close-container','close-btn')" id="close-btn" class="btn font-bold w-[90px]">Closed</button>
+            <button onclick="switchTab('all-card-container','all-btn')" id="all-btn"
+                class="btn btn-primary font-bold w-[90px]">All</button>
+            <button onclick="switchTab('open-container','open-btn')" id="open-btn"
+                class="btn font-bold w-[90px]">Open</button>
+            <button onclick="switchTab('close-container','close-btn')" id="close-btn"
+                class="btn font-bold w-[90px]">Closed</button>
         </section>
 
         <!-- Issues Info and cards -->
@@ -81,6 +85,10 @@
 
             </div>
 
+            <div>
+                <span class="loading loading-bars loading-xl"></span>
+            </div>
+
             <div class="bg-gray-200 p-10 w-full">
                 <div id="all-card-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
 
@@ -105,8 +113,23 @@
                 </div>
             </div>
 
-
         </section>
+
+
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <div id="details-container">
+                    
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
     </main>
     <script src="scripts/functionality.js"></script>
 </body>
