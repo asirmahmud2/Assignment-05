@@ -9,7 +9,7 @@ document.getElementById("login-btn").addEventListener('click',()=>
     if(username=="admin" && password=="admin123")
     {
         alert("Login Successful");
-        window.location.assign("/home.html");
+        window.location.assign("home.html");
     }
     else{
         alert("Wrong Username or Password")
