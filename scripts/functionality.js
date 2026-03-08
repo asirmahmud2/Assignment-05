@@ -96,12 +96,14 @@ const switchTab = (id, id1) => {
     let all = document.getElementById('all-card-container');
     let open = document.getElementById('open-container');
     let closed = document.getElementById('close-container');
+    let search = document.getElementById('search-container');
     let show = document.getElementById(id);
 
 
     all.classList.add('hidden');
     open.classList.add('hidden');
     closed.classList.add('hidden');
+    search.classList.add('hidden');
 
     show.classList.remove('hidden');
 
@@ -126,6 +128,58 @@ document.getElementById('search-btn').addEventListener('click',()=>{
 
     fetch(url)
     .then(res=>res.json())
-    .then(json=>console.log(json.data));
+    .then(json=>showSearchCard(json.data));
 });
 
+const showSearchCard = (allCard) => {
+    const allCardContainer = document.getElementById("search-container");
+    allCardContainer.innerHTML = "";
+    const color1 = "border-t-4 border-green-500";
+    const color2 = "border-t-4 border-purple-500";
+    const img1 = "assets/open-Status.png";
+    const img2 = "assets/closed-Status.png";
+    
+    
+    for (let card of allCard) {
+        const status = card.status;
+        let color = "";
+        let img = "";
+        
+        if (status == "open") {
+            color = color1;
+            img = img1;
+        }
+        else {
+            color = color2;
+            img = img2;
+        }
+        
+        const cardDiv = document.createElement('div');
+        cardDiv.innerHTML = `
+        <div class="card bg-white p-7 ${color} space-y-2">
+        <div class="flex justify-between">
+        <img src="${img}" alt="">
+        <p class="btn rounded-2xl">${card.priority}</p>
+        </div>
+        
+        <div class="space-y-2">
+        <h2 class="font-bold text-xl">${card.title}</h2>
+        <p class="text-gray-700">${card.description}</p>
+        </div>
+        
+        <div class="flex flex-wrap items-center gap-2">
+        ${createLevel(card.labels)}
+        </div>
+        
+        <hr class="-mx-5 my-5 border-gray-200">
+        <div>
+        <p>${card.author}</p>
+        <p>${card.createdAt}</p>
+        </div>
+        </div>
+        `;
+        
+        allCardContainer.append(cardDiv);
+    }
+    switchTab('search-container','all-btn');
+}
