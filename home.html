@@ -38,9 +38,9 @@
                 </div>
 
                 <div class="flex gap-2">
-                    <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                    <input id="search-input" type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
 
-                    <button class="btn btn-primary font-bold text-white">Search</button>
+                    <button id="search-btn" class="btn btn-primary font-bold text-white">Search</button>
                 </div>
             </div>
         </div>
@@ -82,30 +82,7 @@
             </div>
 
             <div class="bg-gray-200 p-10 w-full">
-                <div id="all-card-container" class="grid grid-cols-4 gap-5">
-
-                    <!-- <div id="top-card" class="card bg-white p-7 border-t-4 border-purple-500 space-y-2">
-                        <div class="flex justify-between">
-                            <img src="assets/closed- Status.png" alt="">
-                            <p class="btn rounded-2xl">High</p>
-                        </div>
-
-                        <div class="space-y-2">
-                            <h2 class="font-bold text-xl">Fix navigation menu on mobile devices</h2>
-                            <p class="text-gray-700">The navigation menu doesn't collapse properly on mobile devices...</p>
-                        </div>
-
-                        <div class="flex flex-wrap items-center">
-                            <span class="btn rounded-2xl">Level</span>
-                            <span class="btn rounded-2xl">Level</span>
-                        </div>
-
-                        <hr class="-mx-5 my-5 border-gray-200">
-                        <div>
-                            <p>author</p>
-                            <p>2024-01-15T10:30:00Z</p>
-                        </div>
-                    </div> -->
+                <div id="all-card-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
 
                 </div>
             </div>
@@ -118,6 +95,12 @@
 
             <div class="bg-gray-200 p-10 w-full">
                 <div id="close-container" class="grid grid-cols-4 gap-5 hidden">
+
+                </div>
+            </div>
+
+            <div class="bg-gray-200 p-10 w-full">
+                <div id="search-container" class="grid grid-cols-4 gap-5 hidden">
 
                 </div>
             </div>

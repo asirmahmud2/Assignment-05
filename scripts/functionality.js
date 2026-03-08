@@ -1,3 +1,9 @@
+const createLevel = (arr) => {
+    const Levels = arr.map(el =>`<span class="btn rounded-2xl">${el}</span>`);
+    return (Levels.join(' '));
+}
+
+
 const loadAllCards = () => {
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then(res => res.json())
@@ -41,9 +47,8 @@ const displayAllCards = (allCard) => {
                             <p class="text-gray-700">${card.description}</p>
                         </div>
 
-                        <div class="flex flex-wrap items-center">
-                            <span class="btn rounded-2xl">Level</span>
-                            <span class="btn rounded-2xl">Level</span>
+                        <div class="flex flex-wrap items-center gap-2">
+                            ${createLevel(card.labels)}
                         </div>
 
                         <hr class="-mx-5 my-5 border-gray-200">
@@ -79,6 +84,14 @@ const addClosedCard = (card) => {
 loadAllCards();
 
 
+const updateCount=(id)=>{
+    const container=document.getElementById(id);
+    const totalCards = container.children.length;
+
+    const update =document.getElementById('issue-no');
+    update.innerText=totalCards;
+}
+
 const switchTab = (id, id1) => {
     let all = document.getElementById('all-card-container');
     let open = document.getElementById('open-container');
@@ -101,4 +114,18 @@ const switchTab = (id, id1) => {
     closed.classList.remove('btn-primary');
 
     show.classList.add('btn-primary');
+
+    updateCount(id);
 }
+
+
+document.getElementById('search-btn').addEventListener('click',()=>{
+    const searchInput = document.getElementById('search-input');
+    const input= searchInput.value;
+    const url=`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
+
+    fetch(url)
+    .then(res=>res.json())
+    .then(json=>console.log(json.data));
+});
+
