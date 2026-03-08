@@ -227,3 +227,21 @@ const displayCardDetails = (card) => {
     document.getElementById('my_modal_5').showModal();
 
 }
+
+
+const manageSpinner = (status) => {
+    if (status == true) {
+        document.getElementById('spinner').classList.remove('hidden');
+        document.getElementById('all-card-container').classList.add('hidden');
+        document.getElementById('open-container').classList.add('hidden');
+        document.getElementById('close-container').classList.add('hidden');
+        document.getElementById('search-container').classList.add('hidden');
+    }
+    else{
+        document.getElementById('spinner').classList.add('hidden');
+        document.getElementById('all-card-container').classList.remove('hidden');
+        document.getElementById('open-container').classList.remove('hidden');
+        document.getElementById('close-container').classList.remove('hidden');
+        document.getElementById('search-container').classList.remove('hidden');
+    }
+}
