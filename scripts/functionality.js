@@ -5,9 +5,14 @@ const createLevel = (arr) => {
 
 
 const loadAllCards = () => {
+    manageSpinner(true);
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then(res => res.json())
-        .then(json => displayAllCards(json.data));
+        .then(json => {
+            manageSpinner(false);
+            displayAllCards(json.data);
+            switchTab('all-card-container', 'all-btn');
+        });
 }
 
 
@@ -82,7 +87,6 @@ const addClosedCard = (card) => {
     closeCardContainer.append(card);
 }
 
-loadAllCards();
 
 
 const updateCount = (id) => {
@@ -127,9 +131,13 @@ document.getElementById('search-btn').addEventListener('click', () => {
     const input = searchInput.value;
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${input}`;
 
+    manageSpinner(true);
     fetch(url)
         .then(res => res.json())
-        .then(json => showSearchCard(json.data));
+        .then(json => {
+            manageSpinner(false);
+            showSearchCard(json.data);
+        });
 });
 
 const showSearchCard = (allCard) => {
@@ -247,3 +255,5 @@ const manageSpinner = (status) => {
         document.getElementById('search-container').classList.remove('hidden');
     }
 }
+
+loadAllCards();
