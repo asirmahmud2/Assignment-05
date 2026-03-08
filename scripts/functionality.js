@@ -1,5 +1,5 @@
 const createLevel = (arr) => {
-    const Levels = arr.map(el => `<span class="btn rounded-2xl">${el}</span>`);
+    const Levels = arr.map(el => `<span class="badge badge-outline text-gray-500 font-medium">${el}</span>`);
     return (Levels.join(' '));
 }
 
@@ -36,27 +36,28 @@ const displayAllCards = (allCard) => {
 
         const cardDiv = document.createElement('div');
         cardDiv.innerHTML = `
-        <div onclick="loadCardDetails(${card.id})" class="card bg-white p-7 ${color} space-y-2">
-                        <div class="flex justify-between">
-                            <img src="${img}" alt="">
-                            <p class="btn rounded-2xl bg-red-400">${card.priority}</p>
-                        </div>
-
-                        <div class="space-y-2">
-                            <h2 class="font-bold text-xl">${card.title}</h2>
-                            <p class="text-gray-700">${card.description}</p>
-                        </div>
-
-                        <div class="flex flex-wrap items-center gap-2">
-                            ${createLevel(card.labels)}
-                        </div>
-
-                        <hr class="-mx-5 my-5 border-gray-200">
-                        <div>
-                            <p>${card.author}</p>
-                            <p>${new Date(card.createdAt).toLocaleDateString()}</p>
-                        </div>
-                    </div>
+            <div onclick="loadCardDetails(${card.id})" class="card bg-white p-5 md:p-7 ${color} space-y-4 hover:shadow-xl cursor-pointer flex flex-col h-full">
+    <div class="flex justify-between items-center">
+        <img src="${img}" alt="Status" class="w-6 h-6">
+        <span class="badge bg-red-400 border-none text-gray-700 font-semibold p-3">${card.priority}</span>
+    </div>
+    
+    <div class="space-y-2 flex-grow">
+        <h2 class="font-bold text-xl line-clamp-2" title="${card.title}">${card.title}</h2>
+        <p class="text-gray-500 text-sm line-clamp-3">${card.description}</p>
+    </div>
+    
+    <div class="flex flex-wrap items-center gap-2 mt-2">
+        ${createLevel(card.labels)}
+    </div>
+    
+    <hr class="-mx-5 md:-mx-7 my-3 border-gray-100">
+    
+    <div class="flex justify-between items-center text-sm text-gray-500 font-medium">
+        <p>${card.author}</p>
+        <p>${new Date(card.createdAt).toLocaleDateString()}</p>
+    </div>
+</div>
         `;
 
         allCardContainer.append(cardDiv);
@@ -156,27 +157,28 @@ const showSearchCard = (allCard) => {
 
         const cardDiv = document.createElement('div');
         cardDiv.innerHTML = `
-        <div onclick="loadCardDetails(${card.id})" class="card bg-white p-7 ${color} space-y-2">
-        <div class="flex justify-between">
-        <img src="${img}" alt="">
-        <p class="btn rounded-2xl">${card.priority}</p>
-        </div>
-        
-        <div class="space-y-2">
-        <h2 class="font-bold text-xl">${card.title}</h2>
-        <p class="text-gray-700">${card.description}</p>
-        </div>
-        
-        <div class="flex flex-wrap items-center gap-2">
+            <div onclick="loadCardDetails(${card.id})" class="card bg-white p-5 md:p-7 ${color} space-y-4 hover:shadow-xl cursor-pointer flex flex-col h-full">
+    <div class="flex justify-between items-center">
+        <img src="${img}" alt="Status" class="w-6 h-6">
+        <span class="badge bg-red-400 border-none text-gray-700 font-semibold p-3">${card.priority}</span>
+    </div>
+    
+    <div class="space-y-2 flex-grow">
+        <h2 class="font-bold text-xl line-clamp-2" title="${card.title}">${card.title}</h2>
+        <p class="text-gray-500 text-sm line-clamp-3">${card.description}</p>
+    </div>
+    
+    <div class="flex flex-wrap items-center gap-2 mt-2">
         ${createLevel(card.labels)}
-        </div>
-        
-        <hr class="-mx-5 my-5 border-gray-200">
-        <div>
+    </div>
+    
+    <hr class="-mx-5 md:-mx-7 my-3 border-gray-100">
+    
+    <div class="flex justify-between items-center text-sm text-gray-500 font-medium">
         <p>${card.author}</p>
         <p>${new Date(card.createdAt).toLocaleDateString()}</p>
-        </div>
-        </div>
+    </div>
+</div>
         `;
 
         allCardContainer.append(cardDiv);
@@ -237,7 +239,7 @@ const manageSpinner = (status) => {
         document.getElementById('close-container').classList.add('hidden');
         document.getElementById('search-container').classList.add('hidden');
     }
-    else{
+    else {
         document.getElementById('spinner').classList.add('hidden');
         document.getElementById('all-card-container').classList.remove('hidden');
         document.getElementById('open-container').classList.remove('hidden');
