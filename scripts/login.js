@@ -14,4 +14,4 @@ document.getElementById("login-btn").addEventListener('click',()=>
     else{
         alert("Wrong Username or Password")
     }
-})git init
+})
